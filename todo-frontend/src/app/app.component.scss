@@ -1,0 +1,13 @@
+.todo-container {
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+}
+
+.task-form {
+  flex: 1;
+}
+
+.task-list {
+  flex: 2;
+}
