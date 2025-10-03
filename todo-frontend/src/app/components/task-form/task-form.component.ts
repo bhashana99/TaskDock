@@ -37,6 +37,12 @@ export class TaskFormComponent {
         this.taskForm.reset();
 
         this.taskService.notifyTaskChange();
+
+
+        setTimeout(() => {
+        this.message = '';
+      }, 2000);
+
       },
       error: () => {
         this.message = 'Failed to create task';
