@@ -2,37 +2,40 @@
   <h4 class="fw-bold mb-4">Add a Task</h4>
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-      <input 
-        type="text" 
-        id="title" 
-        formControlName="title" 
-        class="form-control p-2" 
-        placeholder="Title"
-        required>
+      <input type="text" id="title" formControlName="title" class="form-control p-2" placeholder="Title" required>
 
-        <div *ngIf="taskForm.controls['title'].invalid && taskForm.controls['title'].touched" class="text-danger">
+      <div *ngIf="taskForm.controls['title'].hasError('required') && taskForm.controls['title'].touched"
+        class="text-danger">
         Title is required
-        </div>
+      </div>
+      <div *ngIf="taskForm.controls['title'].hasError('maxlength') && taskForm.controls['title'].touched"
+        class="text-danger">
+        Title cannot exceed 20 characters
+      </div>
     </div>
 
     <div class="mb-3">
-      <textarea 
-        id="description" 
-        formControlName="description" 
-        class="form-control p-3"
-        placeholder="Description" 
+      <textarea id="description" formControlName="description" class="form-control p-3" placeholder="Description"
         rows="3"></textarea>
 
-        <div *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched" class="text-danger">
+      <div *ngIf="taskForm.controls['description'].hasError('required') && taskForm.controls['description'].touched"
+        class="text-danger">
         Description is required
-        </div>
+      </div>
+      <div *ngIf="taskForm.controls['description'].hasError('maxlength') && taskForm.controls['description'].touched"
+        class="text-danger">
+        Description cannot exceed 30 characters
+      </div>
+
+
     </div>
 
-      <div class="d-flex justify-content-end">
-         <button type="submit" class="btn btn-primary">Add Task</button>
-       </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
   </form>
 
   <p class="mt-2 text-success" *ngIf="message">{{ message }}</p>
+
 
 </div>
