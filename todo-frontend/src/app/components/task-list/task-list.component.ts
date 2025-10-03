@@ -38,9 +38,13 @@ export class TaskListComponent implements OnInit{
   handleTaskCompleted(taskId: number) {
   this.taskService.completeTask(taskId).subscribe({
     next: () => {
-      
+      this.message = 'Marked task as done';
       this.tasks = this.tasks.filter(t => t.id !== taskId);
+      
 
+      setTimeout(()=>{
+         this.message = ''
+      },2000)
     },
     error: () => {
       this.message = 'Failed to mark task as done';
