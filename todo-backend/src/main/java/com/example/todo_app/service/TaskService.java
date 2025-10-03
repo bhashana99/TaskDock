@@ -3,6 +3,7 @@ package com.example.todo_app.service;
 import com.example.todo_app.dto.TaskRequest;
 import com.example.todo_app.dto.TaskResponse;
 import com.example.todo_app.entity.Task;
+import com.example.todo_app.exception.TaskNotFoundException;
 import com.example.todo_app.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,12 @@ public class TaskService {
 
     public List<Task> getTopFiveTask(){
         return repository.findTop5ByIsCompletedFalseOrderByCreatedAtDesc();
+    }
+
+    public Task markTaskCompleted(Long taskId){
+        return repository.findById(taskId)
+                .orElseThrow(
+                        ()-> new TaskNotFoundException(taskId)
+                );
     }
 }

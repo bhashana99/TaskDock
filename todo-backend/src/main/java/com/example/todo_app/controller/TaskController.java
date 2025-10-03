@@ -33,4 +33,12 @@ public class TaskController {
        List<Task> recentTasks =  taskService.getTopFiveTask();
         return recentTasks;
     }
+
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<Void> completeTask(@PathVariable Long id) {
+         taskService.markTaskCompleted(id);
+
+        return ResponseEntity.noContent().build();
+
+    }
 }
