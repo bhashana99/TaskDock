@@ -30,10 +30,13 @@ export class TaskFormComponent {
     }
 
     const newTask: Task = this.taskForm.value;
+
     this.taskService.createTask(newTask).subscribe({
       next: () => {
         this.message = 'Task created successfully';
         this.taskForm.reset();
+
+        this.taskService.notifyTaskChange();
       },
       error: () => {
         this.message = 'Failed to create task';

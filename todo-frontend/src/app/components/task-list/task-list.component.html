@@ -1,1 +1,12 @@
-<app-task-item></app-task-item>
+<div class="task-list mt-3">
+
+  <div *ngIf="tasks.length === 0">No tasks found.</div>
+
+ 
+  <app-task-item
+    *ngFor="let task of tasks"
+    [task]="task" >
+  </app-task-item>
+
+  <p class="text-success mt-2" *ngIf="message">{{ message }}</p>
+</div>
