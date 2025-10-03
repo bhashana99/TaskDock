@@ -35,4 +35,17 @@ export class TaskListComponent implements OnInit{
     });
   }
 
+  handleTaskCompleted(taskId: number) {
+  this.taskService.completeTask(taskId).subscribe({
+    next: () => {
+      
+      this.tasks = this.tasks.filter(t => t.id !== taskId);
+
+    },
+    error: () => {
+      this.message = 'Failed to mark task as done';
+    }
+  });
+}
+
 }

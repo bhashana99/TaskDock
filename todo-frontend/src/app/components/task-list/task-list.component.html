@@ -5,7 +5,9 @@
  
   <app-task-item
     *ngFor="let task of tasks"
-    [task]="task" >
+    [task]="task" 
+    (taskCompleted)="handleTaskCompleted($event)"
+    >
   </app-task-item>
 
   <p class="text-success mt-2" *ngIf="message">{{ message }}</p>

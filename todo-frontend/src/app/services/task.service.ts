@@ -7,8 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskService {
-
-  private taskCreatingUrl = 'http://localhost:8080/tasks/createTask';
+  
   private taskUrl = 'http://localhost:8080/tasks';
 
   public tasksUpdated = new Subject<void>();
@@ -17,15 +16,20 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   createTask(task: Task): Observable<Task>{
-    return this.http.post<Task>(this.taskCreatingUrl, task);
+    return this.http.post<Task>(`${this.taskUrl}/createTask`, task);
   }
 
    getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.taskUrl);
   }
 
+  completeTask(taskId: number): Observable<void> {
+  return this.http.put<void>(`${this.taskUrl}/${taskId}/complete`, {});
+}
+
+
   notifyTaskChange() {
     this.tasksUpdated.next();
   }
-  
+
 }
