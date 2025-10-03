@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,6 +58,28 @@ public class TaskServiceTest {
         verify(taskRepository, times(1)).save(any(Task.class));
     }
 
+
+    @Test
+    void testGetTop5Tasks_Success() {
+        // given
+        Task task1 = new Task();
+        task1.setTitle("Task 1");
+        Task task2 = new Task();
+        task2.setTitle("Task 2");
+
+        List<Task> tasks = List.of(task1, task2);
+
+        when(taskRepository.findTop5ByIsCompletedFalseOrderByCreatedAtDesc())
+                .thenReturn(tasks);
+
+        // when
+        List<Task> result = taskService.getTopFiveTask();
+
+        // then
+        assertEquals(2, result.size());
+        assertEquals("Task 1", result.get(0).getTitle());
+        verify(taskRepository, times(1)).findTop5ByIsCompletedFalseOrderByCreatedAtDesc();
+    }
 
 
     @Test
