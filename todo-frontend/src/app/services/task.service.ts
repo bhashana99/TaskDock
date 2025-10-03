@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  
+
   private taskUrl = 'http://localhost:8080/tasks';
 
   public tasksUpdated = new Subject<void>();
@@ -24,7 +24,10 @@ export class TaskService {
   }
 
   completeTask(taskId: number): Observable<void> {
-  return this.http.put<void>(`${this.taskUrl}/${taskId}/complete`, {});
+  return this.http.put<void>(`${this.taskUrl}/${taskId}/complete`, {})
+          .pipe(
+            tap(() => this.notifyTaskChange())
+          )
 }
 
 
