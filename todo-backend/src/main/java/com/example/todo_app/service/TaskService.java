@@ -32,10 +32,14 @@ public class TaskService {
         return repository.findTop5ByIsCompletedFalseOrderByCreatedAtDesc();
     }
 
-    public Task markTaskCompleted(Long taskId){
-        return repository.findById(taskId)
+    public void markTaskCompleted(Long taskId){
+        
+         Task task =  repository.findById(taskId)
                 .orElseThrow(
                         ()-> new TaskNotFoundException(taskId)
                 );
+
+         task.setCompleted(true);
+         repository.save(task);
     }
 }
