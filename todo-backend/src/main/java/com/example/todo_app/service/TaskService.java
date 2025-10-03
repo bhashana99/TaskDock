@@ -6,6 +6,8 @@ import com.example.todo_app.entity.Task;
 import com.example.todo_app.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskService {
 
@@ -23,5 +25,9 @@ public class TaskService {
         Task saved = repository.save(task);
 
         return new TaskResponse(saved.getId(), saved.getTitle(), saved.getDescription(), saved.getCreatedAt());
+    }
+
+    public List<Task> getTopFiveTask(){
+        return repository.findTop5ByIsCompletedFalseOrderByCreatedAtDesc();
     }
 }
