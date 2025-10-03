@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class TaskService {
 
-  private taskCreatingUrl = 'http://localhost:8080/tasks';
+  private taskCreatingUrl = 'http://localhost:8080/tasks/createTask';
 
 
   constructor(private http: HttpClient) { }
