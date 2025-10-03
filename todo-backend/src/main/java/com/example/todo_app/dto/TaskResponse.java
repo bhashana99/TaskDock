@@ -7,12 +7,14 @@ public class TaskResponse {
     private String title;
     private String description;
     private LocalDateTime createdAt;
+    private boolean completed;
 
-    public TaskResponse(Long id, String title, String description, LocalDateTime createdAt) {
+    public TaskResponse(Long id, String title, String description, LocalDateTime createdAt, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
+        this.completed = completed;
     }
 
     public Long getId() {
@@ -45,5 +47,13 @@ public class TaskResponse {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

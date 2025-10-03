@@ -25,7 +25,8 @@ public class TaskService {
 
         Task saved = repository.save(task);
 
-        return new TaskResponse(saved.getId(), saved.getTitle(), saved.getDescription(), saved.getCreatedAt());
+        return new TaskResponse(saved.getId(), saved.getTitle(), saved.getDescription(),
+                saved.getCreatedAt(), saved.isCompleted());
     }
 
     public List<Task> getTopFiveTask(){
