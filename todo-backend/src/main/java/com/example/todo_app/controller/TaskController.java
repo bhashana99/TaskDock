@@ -1,0 +1,26 @@
+package com.example.todo_app.controller;
+
+import com.example.todo_app.dto.TaskRequest;
+import com.example.todo_app.dto.TaskResponse;
+import com.example.todo_app.service.TaskService;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/tasks")
+public class TaskController {
+
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @PostMapping("/createTask")
+    public ResponseEntity<TaskResponse> createTask(@RequestBody TaskRequest taskRequest){
+        TaskResponse taskResponse = taskService.createTask(taskRequest);
+
+        return ResponseEntity.ok(taskResponse);
+    }
+}
