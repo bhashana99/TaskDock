@@ -1,6 +1,7 @@
 package com.example.todo_app.service;
 
 import com.example.todo_app.entity.Task;
+import com.example.todo_app.exception.TaskNotFoundException;
 import com.example.todo_app.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -9,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -40,5 +42,14 @@ public class TaskServiceTest {
 
         assertTrue(task.isCompleted());
         verify(taskRepository, times(1)).save(task);
+    }
+
+    @Test
+    void testMarkTaskCompleted_TaskNotFound() {
+
+        when(taskRepository.findById(99L)).thenReturn(Optional.empty());
+
+
+        assertThrows(TaskNotFoundException.class, () -> taskService.markTaskCompleted(99L));
     }
 }
