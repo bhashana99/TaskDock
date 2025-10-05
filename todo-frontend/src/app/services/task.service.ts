@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
 import { Observable, Subject, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private taskUrl = 'http://localhost:8080/tasks';
+  private taskUrl = environment.apiUrl;
 
   public tasksUpdated = new Subject<void>();
 
