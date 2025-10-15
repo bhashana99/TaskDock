@@ -1,4 +1,4 @@
-# Todo Web Application
+# TaskDock Web Application
 
 This is a full-stack **To-Do application** built with **Angular (frontend)**, **Spring Boot (backend)**, and **MySQL (database)**, all running in Docker containers.
 
